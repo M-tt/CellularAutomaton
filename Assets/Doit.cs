@@ -35,7 +35,7 @@ public class Doit : MonoBehaviour
         if (updateCounter % updateSkips != 0)
             return;
 
-        Debug.Log("Stepping..");
+        //Debug.Log("Stepping @" + DateTime.Now.ToString());
         cellgrid.ForEach((List<Cell> l) => l.ForEach((Cell c) => doConwayStep(c)));
         cellgrid.ForEach((List<Cell> l) => l.ForEach((Cell c) => c.transit()));
     }
