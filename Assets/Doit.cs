@@ -36,13 +36,13 @@ public class Doit : MonoBehaviour
             return;
 
         //Debug.Log("Stepping @" + DateTime.Now.ToString());
-        cellgrid.ForEach((List<Cell> l) => l.ForEach((Cell c) => doConwayStep(c)));
+        cellgrid.ForEach((List<Cell> l) => l.ForEach((Cell c) => DoConwayStep(c)));
         cellgrid.ForEach((List<Cell> l) => l.ForEach((Cell c) => c.transit()));
     }
 
-    private void doConwayStep(Cell c)
+    private void DoConwayStep(Cell c)
     {
-        int count = c.countNeighbors();
+        int count = c.CountNeighbors();
 
         if (c.Alive)
         {
@@ -92,7 +92,7 @@ public class Cell
 
     public GameObject GameObject { get; set; }
 
-    private void createCellTemplate()
+    private void CreateCellTemplate()
     {
         if (cellTemplate == null)
             cellTemplate = GameObject.FindGameObjectWithTag("Player");
@@ -100,7 +100,7 @@ public class Cell
 
     public Cell(List<List<Cell>> grid, int x, int y, int width, int height)
     {
-        this.createCellTemplate();
+        this.CreateCellTemplate();
         this.grid = grid;
         X = x;
         Y = y;
@@ -108,7 +108,7 @@ public class Cell
         Alive = UnityEngine.Random.Range(0, 2) == 0;
     }
 
-    public Cell getNeighbor(int x, int y)
+    public Cell GetNeighbor(int x, int y)
     {
         if (Y + y < 0 || Y + y >= grid.Count-1 || X + x < 0 || X + x >= grid[Y+y].Count-1)
             return null;
@@ -116,7 +116,7 @@ public class Cell
         return grid[Y + y][X + x];
     }
 
-    public int countNeighbors()
+    public int CountNeighbors()
     {
         int count = 0;
         for (int x = -1; x < 2; x++)
@@ -126,7 +126,7 @@ public class Cell
                 if (x == 0 && y == 0)
                     continue;
 
-                Cell neighbor = getNeighbor(x, y);
+                Cell neighbor = GetNeighbor(x, y);
                 if (neighbor != null && neighbor.Alive)
                     count++;
             }
